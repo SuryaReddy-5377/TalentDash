@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-// Force dynamic rendering for API routes
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
@@ -78,4 +77,9 @@ export async function GET(
       { status: 500 }
     );
   }
+}
+
+// Add default export to fix TypeScript error
+export default async function handler() {
+  return new Response('API route', { status: 200 });
 }

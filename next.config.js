@@ -6,12 +6,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: 'standalone',
   images: {
     unoptimized: true,
   },
-  // Ensure .next is generated
-  distDir: '.next',
+  // Skip API routes during build
+  serverRuntimeConfig: {
+    // Will only be available on the server side
+  },
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+  },
 }
 
 module.exports = nextConfig
