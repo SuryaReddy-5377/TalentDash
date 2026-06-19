@@ -1,5 +1,8 @@
 {
+  "/api/salaries/route": "app/api/salaries/route.js",
   "/page": "app/page.js",
-  "/companies/page": "app/companies/page.js",
-  "/login/page": "app/login/page.js"
+  "/salaries/page": "app/salaries/page.js",
+  "/community/page": "app/community/page.js",
+  "/compare/page": "app/compare/page.js",
+  "/companies/page": "app/companies/page.js"
 }
