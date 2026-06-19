@@ -6,8 +6,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Remove unused routes
-  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  // Disable static generation for sitemap
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
+  },
 }
 
 module.exports = nextConfig
