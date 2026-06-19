@@ -3,23 +3,26 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Company {
-  id           String   @id @default(cuid())
-  name         String
-  slug         String   @unique
-  normalizedName String @unique
-  industry     String?
-  headquarters String?
-  foundedYear  Int?
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  normalizedName String   @unique
+  industry       String?
+  headquarters   String?
+  foundedYear    Int?
   headcountRange String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   salaries Salary[]
+
+  @@index([normalizedName])
+  @@index([slug])
 }
 
 model Salary {
@@ -30,14 +33,19 @@ model Salary {
   location          String
   currency          String
   experienceYears   Int
-  baseSalary        BigInt
-  bonus             BigInt   @default(0)
-  stock             BigInt   @default(0)
-  totalCompensation BigInt
+  baseSalary        Int
+  bonus             Int      @default(0)
+  stock             Int      @default(0)
+  totalCompensation Int
   source            String
-  confidenceScore   Float    // ✅ Changed from Decimal to Float
+  confidenceScore   Float
   isVerified        Boolean  @default(false)
   submittedAt       DateTime @default(now())
 
   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, level, location])
+  @@index([totalCompensation])
+  @@index([submittedAt])
+  @@index([location, level])
 }
