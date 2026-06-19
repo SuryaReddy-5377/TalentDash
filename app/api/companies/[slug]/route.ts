@@ -24,30 +24,29 @@ export async function GET(
       );
     }
 
-    // Convert BigInt to Number for JSON serialization
+    // Convert BigInt to Number
     const serializedSalaries = company.salaries.map((s: any) => ({
       ...s,
-      baseSalary: typeof s.baseSalary === 'bigint' ? Number(s.baseSalary) : s.baseSalary,
-      bonus: typeof s.bonus === 'bigint' ? Number(s.bonus) : s.bonus,
-      stock: typeof s.stock === 'bigint' ? Number(s.stock) : s.stock,
-      totalCompensation: typeof s.totalCompensation === 'bigint' ? Number(s.totalCompensation) : s.totalCompensation,
+      baseSalary: Number(s.baseSalary),
+      bonus: Number(s.bonus),
+      stock: Number(s.stock),
+      totalCompensation: Number(s.totalCompensation),
     }));
 
-    // Compute median
-    const totalCompValues = serializedSalaries
+    // Calculate median
+    const values = serializedSalaries
       .map((s: any) => Number(s.totalCompensation))
       .sort((a: number, b: number) => a - b);
     
     let medianTotal = 0;
-    if (totalCompValues.length > 0) {
-      const mid = Math.floor(totalCompValues.length / 2);
-      if (totalCompValues.length % 2 === 0) {
-        medianTotal = (totalCompValues[mid - 1] + totalCompValues[mid]) / 2;
-      } else {
-        medianTotal = totalCompValues[mid];
-      }
+    if (values.length > 0) {
+      const mid = Math.floor(values.length / 2);
+      medianTotal = values.length % 2 === 0 
+        ? (values[mid - 1] + values[mid]) / 2 
+        : values[mid];
     }
 
+    // Level distribution
     const levelDistribution: Record<string, number> = {};
     for (const salary of serializedSalaries) {
       levelDistribution[salary.level] = (levelDistribution[salary.level] || 0) + 1;
@@ -66,14 +65,10 @@ export async function GET(
       salaries: serializedSalaries,
       medianTotalCompensation: medianTotal,
       levelDistribution,
-    }, {
-      headers: {
-        'Cache-Control': 's-maxage=3600, stale-while-revalidate=86400',
-      },
     });
 
   } catch (error) {
-    console.error('Company API error:', error);
+    console.error('API Error:', error);
     return NextResponse.json(
       { error: true, message: 'Internal server error' },
       { status: 500 }
