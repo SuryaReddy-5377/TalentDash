@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Company {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  normalizedName String @unique
+  industry     String?
+  headquarters String?
+  foundedYear  Int?
+  headcountRange String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  salaries Salary[]
+}
+
+model Salary {
+  id                String   @id @default(cuid())
+  companyId         String
+  role              String
+  level             String
+  location          String
+  currency          String
+  experienceYears   Int
+  baseSalary        BigInt
+  bonus             BigInt   @default(0)
+  stock             BigInt   @default(0)
+  totalCompensation BigInt
+  source            String
+  confidenceScore   Float    // ✅ Changed from Decimal to Float
+  isVerified        Boolean  @default(false)
+  submittedAt       DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
