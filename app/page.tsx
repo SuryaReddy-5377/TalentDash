@@ -1,136 +1,108 @@
-'use client';
-
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { prisma } from '@/lib/prisma';
 
-export default function HomePage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
-  const totalSalaries = 379; 
-  const totalCompanies = 20;
-
-  useEffect(() => {
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      setIsLoggedIn(true);
-    }
-    
-    const checkAuth = () => {
-      setIsLoggedIn(!!localStorage.getItem('currentUser'));
-    };
-    window.addEventListener('local-storage-login', checkAuth);
-    return () => window.removeEventListener('local-storage-login', checkAuth);
-  }, []);
+export default async function HomePage() {
+  const totalCompanies = await prisma.company.count();
+  const totalSalaries = await prisma.salary.count();
 
   return (
-    <main 
-      className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
-      style={{
-        backgroundImage: `url('/hero-sofa.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
-      {/* Dynamic Overlay: Darker on the left side to make sure text is completely clear and readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent z-0"></div>
-
-      <div className="relative z-10 w-full">
-        {/* Hero Section Container */}
-        <div className="w-full min-h-screen flex items-center pt-24 pb-16">
-          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-            <div className="max-w-3xl w-full">
-              
-              {/* Badge Counter */}
-              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 sm:px-6 py-2 rounded-full border border-gray-200 shadow-sm mb-6 sm:mb-8">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span className="text-sm sm:text-base font-medium text-gray-800">
-                  {totalSalaries.toLocaleString()}+ salary records • {totalCompanies} companies
-                </span>
-              </div>
-              
-              {/* Heading */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-4 sm:mb-6">
-                Know Your <span className="text-green-600 font-extrabold">Worth</span>
-              </h1>
-              
-              {/* Subtitle - Increased text contrast against background */}
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-950 font-medium mb-8 sm:mb-10 max-w-2xl leading-relaxed drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
-                Compare salaries, company reviews, and interview experiences across 
-                top companies in India. Make data-driven career decisions with confidence.
-              </p>
-              
-              {/* Responsive Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-                <Link 
-                  href={isLoggedIn ? "/salaries" : "/login?redirect=salaries"} 
-                  className="bg-green-600 hover:bg-green-700 text-white text-center px-8 py-3.5 sm:py-4 rounded-xl font-bold transition-all text-base sm:text-lg shadow-sm hover:shadow-md tracking-wide"
-                >
-                  Explore Salaries →
-                </Link>
-                <Link 
-                  href={isLoggedIn ? "/companies" : "/login?redirect=companies"} 
-                  className="border-2 border-green-600 text-green-700 hover:bg-green-600/10 text-center px-8 py-3.5 sm:py-4 rounded-xl font-bold transition-all text-base sm:text-lg bg-white/30 backdrop-blur-sm tracking-wide"
-                >
-                  View Companies
-                </Link>
-              </div>
-            </div>
-          </div>
+    <main>
+      {/* Hero Section with Green Background Pattern */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-50/30 py-20">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-green-300 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-200 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-100 rounded-full blur-3xl"></div>
         </div>
-
-        {/* Stats Row */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ marginTop: '-60px' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl p-5 text-center shadow-lg border border-green-100">
-              <div className="text-2xl sm:text-3xl font-bold text-green-600">{totalSalaries.toLocaleString()}</div>
-              <div className="text-xs sm:text-sm text-gray-500">Salary Records</div>
+        
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 opacity-5" 
+             style={{
+               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310B981' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+               backgroundSize: '60px 60px'
+             }}
+        ></div>
+        
+        <div className="container-custom relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full border border-green-200 shadow-sm mb-6">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="text-sm font-medium text-gray-700">
+                {totalSalaries.toLocaleString()}+ salary records • {totalCompanies} companies
+              </span>
             </div>
-            <div className="bg-white rounded-xl p-5 text-center shadow-lg border border-green-100">
-              <div className="text-2xl sm:text-3xl font-bold text-gray-900">{totalCompanies}</div>
-              <div className="text-xs sm:text-sm text-gray-500">Companies</div>
-            </div>
-            <div className="bg-white rounded-xl p-5 text-center shadow-lg border border-green-100">
-              <div className="text-2xl sm:text-3xl font-bold text-gray-900">10+</div>
-              <div className="text-xs sm:text-sm text-gray-500">Levels</div>
-            </div>
-            <div className="bg-white rounded-xl p-5 text-center shadow-lg border border-green-100">
-              <div className="text-2xl sm:text-3xl font-bold text-gray-900">5+</div>
-              <div className="text-xs sm:text-sm text-gray-500">Cities</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Explore. Compare. Grow.</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
-              Discover real salary insights, read reviews, prepare for interviews, and find the right opportunities — all in one place.
+            
+            <h1 className="text-5xl md:text-6xl font-bold text-[#1F2937] mb-4">
+              Know Your <span className="text-green-600">Worth</span>
+            </h1>
+            
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Compare salaries, company reviews, and interview experiences across 
+              top companies in India. Make data-driven career decisions with confidence.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/salaries" className="btn-primary">
+                Explore Salaries
+              </Link>
+              <Link href="/companies" className="btn-outline">
+                View Companies
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Row */}
+      <section className="container-custom -mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="card p-6 text-center">
+            <div className="stat-value stat-value-green">{totalSalaries.toLocaleString()}</div>
+            <div className="stat-label">Salary Records</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="stat-value">{totalCompanies}</div>
+            <div className="stat-label">Companies</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="stat-value">10+</div>
+            <div className="stat-label">Levels</div>
+          </div>
+          <div className="card p-6 text-center">
+            <div className="stat-value">5+</div>
+            <div className="stat-label">Cities</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-16 container-custom">
+        <h2 className="text-3xl font-bold text-center mb-4">Why TalentDash?</h2>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Get the complete picture of your career with structured, comparable data
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="card p-8 text-center hover:shadow-lg transition-all">
+            <div className="feature-icon">💰</div>
+            <h3 className="text-lg font-semibold mb-2">Salary Insights</h3>
+            <p className="text-gray-600 text-sm">Compare compensation across companies, levels, and locations</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl p-8 text-center shadow-sm border border-green-100 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">💰</div>
-              <h3 className="text-lg font-semibold text-gray-900">Salary Insights</h3>
-              <p className="text-gray-500 text-sm mt-1">Compare compensation across companies, levels, and locations</p>
-            </div>
-            
-            <div className="bg-white rounded-xl p-8 text-center shadow-sm border border-green-100 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">⭐</div>
-              <h3 className="text-lg font-semibold text-gray-900">Company Reviews</h3>
-              <p className="text-gray-500 text-sm mt-1">Read anonymous reviews from verified employees</p>
-            </div>
-            
-            <div className="bg-white rounded-xl p-8 text-center shadow-sm border border-green-100 hover:shadow-lg transition-all">
-              <div className="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🎯</div>
-              <h3 className="text-lg font-semibold text-gray-900">Interview Experiences</h3>
-              <p className="text-gray-500 text-sm mt-1">Learn from real interview experiences and questions</p>
-            </div>
+          <div className="card p-8 text-center hover:shadow-lg transition-all">
+            <div className="feature-icon">⭐</div>
+            <h3 className="text-lg font-semibold mb-2">Company Reviews</h3>
+            <p className="text-gray-600 text-sm">Read anonymous reviews from verified employees</p>
           </div>
-        </section>
-      </div>
+          
+          <div className="card p-8 text-center hover:shadow-lg transition-all">
+            <div className="feature-icon">🎯</div>
+            <h3 className="text-lg font-semibold mb-2">Interview Experiences</h3>
+            <p className="text-gray-600 text-sm">Learn from real interview experiences and questions</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
