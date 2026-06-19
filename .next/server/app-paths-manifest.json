@@ -1,8 +1,17 @@
 {
   "/api/salaries/route": "app/api/salaries/route.js",
-  "/page": "app/page.js",
-  "/salaries/page": "app/salaries/page.js",
-  "/community/page": "app/community/page.js",
+  "/reviews/page": "app/reviews/page.js",
+  "/interviews/page": "app/interviews/page.js",
+  "/companies/[slug]/page": "app/companies/[slug]/page.js",
+  "/interviews/[slug]/page": "app/interviews/[slug]/page.js",
+  "/tools/salary-calculator/page": "app/tools/salary-calculator/page.js",
+  "/reviews/[slug]/page": "app/reviews/[slug]/page.js",
+  "/tools/hike-calculator/page": "app/tools/hike-calculator/page.js",
+  "/companies/page": "app/companies/page.js",
   "/compare/page": "app/compare/page.js",
-  "/companies/page": "app/companies/page.js"
+  "/tools/page": "app/tools/page.js",
+  "/tools/equity-calculator/page": "app/tools/equity-calculator/page.js",
+  "/community/page": "app/community/page.js",
+  "/community/[slug]/page": "app/community/[slug]/page.js",
+  "/workplace-index/page": "app/workplace-index/page.js"
 }

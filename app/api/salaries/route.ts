@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-
-export const dynamic = 'force-dynamic';
+import { prisma } from '../../../lib/prisma';
 
 export async function GET() {
   try {
@@ -15,12 +13,14 @@ export async function GET() {
       take: 100,
     });
 
+    // Convert BigInt to Number
     const serializedSalaries = salaries.map((salary) => ({
       ...salary,
       baseSalary: Number(salary.baseSalary),
       bonus: Number(salary.bonus),
       stock: Number(salary.stock),
       totalCompensation: Number(salary.totalCompensation),
+      confidenceScore: Number(salary.confidenceScore),
     }));
 
     return NextResponse.json({ data: serializedSalaries });
