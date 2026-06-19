@@ -1,1 +1,21 @@
-"use strict";(()=>{var e={};e.id=717,e.ids=[717],e.modules={3524:e=>{e.exports=require("@prisma/client")},399:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},9348:e=>{e.exports=require("next/dist/server/app-render/work-async-storage.external.js")},412:e=>{e.exports=require("next/dist/server/app-render/work-unit-async-storage.external.js")},7911:(e,t,a)=>{a.r(t),a.d(t,{patchFetch:()=>g,routeModule:()=>y,serverHooks:()=>f,workAsyncStorage:()=>w,workUnitAsyncStorage:()=>h});var r={};a.r(r),a.d(r,{default:()=>d});var i={};a.r(i),a.d(i,{GET:()=>x});var n=a(2412),s=a(4293),o=a(4147),p=a(1915),l=a(3524);let u=globalThis.prisma??new l.PrismaClient;async function d(){let e="http://localhost:3000",t=await u.company.findMany({select:{slug:!0,updatedAt:!0}}),a=[{url:e,lastModified:new Date,changeFrequency:"daily",priority:1},{url:`${e}/salaries`,lastModified:new Date,changeFrequency:"weekly",priority:.9},{url:`${e}/companies`,lastModified:new Date,changeFrequency:"weekly",priority:.8},{url:`${e}/compare`,lastModified:new Date,changeFrequency:"weekly",priority:.7}];for(let r of t)a.push({url:`${e}/companies/${r.slug}`,lastModified:r.updatedAt||new Date,changeFrequency:"weekly",priority:.8});return a}var c=a(5940);let m={...r}.default;if("function"!=typeof m)throw Error('Default export is missing in "C:\\INTERNSHIP\\Unstop\\newtask\\talentdash\\app\\sitemap.ts"');async function x(e,t){let{__metadata_id__:a,...r}=await t.params||{},i=!!a&&a.endsWith(".xml");if(a&&!i)return new p.NextResponse("Not Found",{status:404});let n=a&&i?a.slice(0,-4):void 0,s=await m({id:n}),o=(0,c.resolveRouteData)(s,"sitemap");return new p.NextResponse(o,{headers:{"Content-Type":"application/xml","Cache-Control":"public, max-age=0, must-revalidate"}})}let y=new n.AppRouteRouteModule({definition:{kind:s.RouteKind.APP_ROUTE,page:"/sitemap.xml/route",pathname:"/sitemap.xml",filename:"sitemap",bundlePath:"app/sitemap.xml/route"},resolvedPagePath:"next-metadata-route-loader?filePath=C%3A%5CINTERNSHIP%5CUnstop%5Cnewtask%5Ctalentdash%5Capp%5Csitemap.ts&isDynamicRouteExtension=1!?__next_metadata_route__",nextConfigOutput:"",userland:i}),{workAsyncStorage:w,workUnitAsyncStorage:h,serverHooks:f}=y;function g(){return(0,o.patchFetch)({workAsyncStorage:w,workUnitAsyncStorage:h})}}};var t=require("../../webpack-runtime.js");t.C(e);var a=e=>t(t.s=e),r=t.X(0,[147,971],()=>a(7911));module.exports=r})();
+"use strict";(()=>{var e={};e.id=475,e.ids=[475],e.modules={846:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},4870:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},9294:e=>{e.exports=require("next/dist/server/app-render/work-async-storage.external.js")},3033:e=>{e.exports=require("next/dist/server/app-render/work-unit-async-storage.external.js")},2845:(e,t,r)=>{r.r(t),r.d(t,{patchFetch:()=>m,routeModule:()=>p,serverHooks:()=>c,workAsyncStorage:()=>u,workUnitAsyncStorage:()=>d});var a={};r.r(a),r.d(a,{GET:()=>l});var s=r(2706),o=r(8203),i=r(5994),n=r(9187);async function l(){let e="https://talentdash.vercel.app",t=`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${e}</loc>
+    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${e}/salaries</loc>
+    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${e}/companies</loc>
+    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>`;return new n.NextResponse(t,{headers:{"Content-Type":"application/xml","Cache-Control":"public, max-age=86400, stale-while-revalidate=86400"}})}let p=new s.AppRouteRouteModule({definition:{kind:o.RouteKind.APP_ROUTE,page:"/sitemap.xml/route",pathname:"/sitemap.xml",filename:"route",bundlePath:"app/sitemap.xml/route"},resolvedPagePath:"C:\\INTERNSHIP\\Unstop\\newtask\\talentdash\\app\\sitemap.xml\\route.ts",nextConfigOutput:"",userland:a}),{workAsyncStorage:u,workUnitAsyncStorage:d,serverHooks:c}=p;function m(){return(0,i.patchFetch)({workAsyncStorage:u,workUnitAsyncStorage:d})}}};var t=require("../../webpack-runtime.js");t.C(e);var r=e=>t(t.s=e),a=t.X(0,[989,452],()=>r(2845));module.exports=a})();

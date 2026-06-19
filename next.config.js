@@ -6,24 +6,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable sitemap generation
-  async rewrites() {
-    return [];
-  },
-  // Disable static generation for problematic pages
-  output: 'standalone',
+  // Remove unused routes
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
 }
 
 module.exports = nextConfig
-module.exports = {
-  // ...other config
-  webpack: (config) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
-    return config;
-  },
-}
