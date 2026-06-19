@@ -6,10 +6,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable static generation for sitemap
-  generateBuildId: async () => {
-    return 'build-' + Date.now();
+  output: 'standalone',
+  images: {
+    unoptimized: true,
   },
+  // Ensure .next is generated
+  distDir: '.next',
 }
 
 module.exports = nextConfig
