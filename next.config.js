@@ -9,6 +9,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Skip API routes during build
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
 }
 
 module.exports = nextConfig
