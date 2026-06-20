@@ -7,7 +7,6 @@ export default function ToolsPage() {
       name: 'Salary Calculator',
       description: 'Calculate your salary based on experience, location, and role',
       icon: '💰',
-      color: 'bg-green-50 border-green-200',
       href: '/tools/salary-calculator',
     },
     {
@@ -15,7 +14,6 @@ export default function ToolsPage() {
       name: 'Hike Calculator',
       description: 'Calculate your salary hike percentage and new salary',
       icon: '📈',
-      color: 'bg-blue-50 border-blue-200',
       href: '/tools/hike-calculator',
     },
     {
@@ -23,7 +21,6 @@ export default function ToolsPage() {
       name: 'Equity Calculator',
       description: 'Calculate the value of your RSUs and ESOPs',
       icon: '🏦',
-      color: 'bg-purple-50 border-purple-200',
       href: '/tools/equity-calculator',
     },
     {
@@ -31,7 +28,6 @@ export default function ToolsPage() {
       name: 'Offer Comparison',
       description: 'Compare multiple job offers side by side',
       icon: '⚖️',
-      color: 'bg-orange-50 border-orange-200',
       href: '/compare',
     },
   ];
@@ -39,8 +35,8 @@ export default function ToolsPage() {
   return (
     <main className="container-custom py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937]">Career Tools</h1>
-        <p className="text-gray-600 mt-1">Tools to help you make better career decisions</p>
+        <h1 className="text-3xl font-bold text-[#222222]">Career Tools</h1>
+        <p className="text-[#717171] mt-1">Tools to help you make better career decisions</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -48,16 +44,16 @@ export default function ToolsPage() {
           <Link
             key={tool.id}
             href={tool.href}
-            className={`card p-6 ${tool.color} hover:shadow-lg transition-all group border-2`}
+            className="card p-6 hover:shadow-lg transition-all hover:border-[#FF5A5F] group"
           >
             <div className="flex items-start gap-4">
               <div className="text-3xl">{tool.icon}</div>
               <div>
-                <h3 className="text-lg font-semibold text-[#1F2937] group-hover:text-[#10B981] transition-colors">
+                <h3 className="text-lg font-semibold text-[#222222] group-hover:text-[#FF5A5F] transition-colors">
                   {tool.name}
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
-                <span className="text-sm text-green-600 font-medium mt-2 inline-block">Try now →</span>
+                <p className="text-sm text-[#484848] mt-1">{tool.description}</p>
+                <span className="text-sm text-[#FF5A5F] font-medium mt-2 inline-block">Try now →</span>
               </div>
             </div>
           </Link>

@@ -51,11 +51,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/companies/page.js"
     ],
-    "/companies/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/companies/[slug]/page.js"
-    ],
     "/reviews/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -65,16 +60,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/reviews/[slug]/page.js"
-    ],
-    "/interviews/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/interviews/page.js"
-    ],
-    "/interviews/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/interviews/[slug]/page.js"
     ],
     "/compare/loading": [
       "static/chunks/webpack.js",
@@ -86,40 +71,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/compare/page.js"
     ],
-    "/tools/page": [
+    "/companies/[slug]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/tools/page.js"
-    ],
-    "/tools/salary-calculator/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/tools/salary-calculator/page.js"
-    ],
-    "/tools/hike-calculator/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/tools/hike-calculator/page.js"
-    ],
-    "/tools/equity-calculator/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/tools/equity-calculator/page.js"
+      "static/chunks/app/companies/[slug]/page.js"
     ],
     "/community/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/community/page.js"
-    ],
-    "/community/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/community/[slug]/page.js"
-    ],
-    "/workplace-index/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/workplace-index/page.js"
     ]
   }
 }

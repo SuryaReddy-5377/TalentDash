@@ -28,20 +28,20 @@ export default function ComparePage() {
   if (loading) {
     return (
       <div className="container-custom py-8">
-        <div className="text-center py-12">Loading...</div>
+        <div className="text-center py-12 text-[#484848]">Loading...</div>
       </div>
     );
   }
 
   return (
     <main className="container-custom py-8">
-      <h1 className="text-3xl font-bold text-[#1F2937] mb-8">Compare Salaries</h1>
+      <h1 className="text-3xl font-bold text-[#222222] mb-8">Compare Salaries</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="card p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Salary Record 1</label>
+          <label className="block text-sm font-medium text-[#484848] mb-2">Salary Record 1</label>
           <select
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]"
+            className="w-full p-3 border border-[#EBEBEB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5A5F] focus:border-transparent bg-white text-[#222222]"
             onChange={(e) => {
               const selected = salaries.find(s => s.id === e.target.value);
               setRecord1(selected);
@@ -57,9 +57,9 @@ export default function ComparePage() {
         </div>
 
         <div className="card p-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Salary Record 2</label>
+          <label className="block text-sm font-medium text-[#484848] mb-2">Salary Record 2</label>
           <select
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10B981]"
+            className="w-full p-3 border border-[#EBEBEB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF5A5F] focus:border-transparent bg-white text-[#222222]"
             onChange={(e) => {
               const selected = salaries.find(s => s.id === e.target.value);
               setRecord2(selected);
@@ -89,56 +89,59 @@ export default function ComparePage() {
               </thead>
               <tbody>
                 <tr>
-                  <td className="font-semibold">Company</td>
-                  <td>{record1.company?.name}</td>
-                  <td>{record2.company?.name}</td>
+                  <td className="font-semibold text-[#222222]">Company</td>
+                  <td className="text-[#484848]">{record1.company?.name}</td>
+                  <td className="text-[#484848]">{record2.company?.name}</td>
                   <td>—</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">Role</td>
-                  <td>{record1.role}</td>
-                  <td>{record2.role}</td>
+                  <td className="font-semibold text-[#222222]">Role</td>
+                  <td className="text-[#484848]">{record1.role}</td>
+                  <td className="text-[#484848]">{record2.role}</td>
                   <td>—</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">Level</td>
-                  <td>{record1.level}</td>
-                  <td>{record2.level}</td>
+                  <td className="font-semibold text-[#222222]">Level</td>
+                  <td className="text-[#484848]">{record1.level}</td>
+                  <td className="text-[#484848]">{record2.level}</td>
                   <td>—</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">Location</td>
-                  <td>{record1.location}</td>
-                  <td>{record2.location}</td>
+                  <td className="font-semibold text-[#222222]">Location</td>
+                  <td className="text-[#484848]">{record1.location}</td>
+                  <td className="text-[#484848]">{record2.location}</td>
                   <td>—</td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">Base Salary</td>
-                  <td>{formatCurrency(Number(record1.baseSalary))}</td>
-                  <td>{formatCurrency(Number(record2.baseSalary))}</td>
-                  <td className={Number(record1.baseSalary) - Number(record2.baseSalary) > 0 ? 'text-green-600 font-semibold' : 'text-red-500 font-semibold'}>
+                  <td className="font-semibold text-[#222222]">Base Salary</td>
+                  <td className="text-[#484848]">{formatCurrency(Number(record1.baseSalary))}</td>
+                  <td className="text-[#484848]">{formatCurrency(Number(record2.baseSalary))}</td>
+                  <td className={Number(record1.baseSalary) - Number(record2.baseSalary) > 0 ? 'text-[#008A05] font-semibold' : 'text-[#D93025] font-semibold'}>
                     {Number(record1.baseSalary) - Number(record2.baseSalary) > 0 ? '+' : ''}
                     {formatCurrency(Number(record1.baseSalary) - Number(record2.baseSalary))}
                   </td>
                 </tr>
                 <tr>
-                  <td className="font-semibold">Stock</td>
-                  <td>{record1.stock > 0 ? formatCurrency(Number(record1.stock)) : '—'}</td>
-                  <td>{record2.stock > 0 ? formatCurrency(Number(record2.stock)) : '—'}</td>
-                  <td className={Number(record1.stock) - Number(record2.stock) > 0 ? 'text-green-600 font-semibold' : 'text-red-500 font-semibold'}>
+                  <td className="font-semibold text-[#222222]">Stock</td>
+                  <td className="text-[#484848]">{record1.stock > 0 ? formatCurrency(Number(record1.stock)) : '—'}</td>
+                  <td className="text-[#484848]">{record2.stock > 0 ? formatCurrency(Number(record2.stock)) : '—'}</td>
+                  <td className={Number(record1.stock) - Number(record2.stock) > 0 ? 'text-[#008A05] font-semibold' : 'text-[#D93025] font-semibold'}>
                     {Number(record1.stock) - Number(record2.stock) > 0 ? '+' : ''}
                     {formatCurrency(Number(record1.stock) - Number(record2.stock))}
                   </td>
                 </tr>
-                <tr className="bg-green-50 font-bold">
-                  <td className="font-bold text-[#10B981]">Total Compensation</td>
-                  <td className="text-[#10B981]">{formatCurrency(Number(record1.totalCompensation))}</td>
-                  <td className="text-[#10B981]">{formatCurrency(Number(record2.totalCompensation))}</td>
-                  <td className={Number(record1.totalCompensation) - Number(record2.totalCompensation) > 0 ? 'text-green-600' : 'text-red-500'}>
+                <tr className="bg-[#FFF5F5] font-bold">
+                  <td className="font-bold text-[#FF5A5F]">Total Compensation</td>
+                  <td className="text-[#FF5A5F]">{formatCurrency(Number(record1.totalCompensation))}</td>
+                  <td className="text-[#FF5A5F]">{formatCurrency(Number(record2.totalCompensation))}</td>
+                  <td className={Number(record1.totalCompensation) - Number(record2.totalCompensation) > 0 ? 'text-[#008A05]' : 'text-[#D93025]'}>
                     {Number(record1.totalCompensation) - Number(record2.totalCompensation) > 0 ? '+' : ''}
                     {formatCurrency(Number(record1.totalCompensation) - Number(record2.totalCompensation))}
                     {Number(record1.totalCompensation) > Number(record2.totalCompensation) && 
-                      <span className="ml-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Winner 🏆</span>
+                      <span className="ml-2 text-xs winner-badge">Winner 🏆</span>
+                    }
+                    {Number(record1.totalCompensation) < Number(record2.totalCompensation) && 
+                      <span className="ml-2 text-xs bg-[#FFF5F5] text-[#FF5A5F] px-2 py-1 rounded-full">Higher TC</span>
                     }
                   </td>
                 </tr>
@@ -149,7 +152,7 @@ export default function ComparePage() {
       )}
 
       {(!record1 || !record2) && (
-        <div className="text-center py-12 text-gray-500 card p-8">
+        <div className="text-center py-12 text-[#717171] card p-8">
           Select two salary records to compare
         </div>
       )}

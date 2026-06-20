@@ -28,11 +28,11 @@ export default async function WorkplaceIndexPage() {
   return (
     <main className="container-custom py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937]">Workplace Index</h1>
-        <p className="text-gray-600 mt-1">Ranking companies on culture, compensation, growth, diversity, and WFH</p>
+        <h1 className="text-3xl font-bold text-[#222222]">Workplace Index</h1>
+        <p className="text-[#717171] mt-1">Ranking companies on culture, compensation, growth, diversity, and WFH</p>
       </div>
 
-      <div className="card overflow-hidden border-green-100">
+      <div className="card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="table-modern">
             <thead>
@@ -49,17 +49,17 @@ export default async function WorkplaceIndexPage() {
             </thead>
             <tbody>
               {sortedCompanies.map((company, index) => (
-                <tr key={company.id} className={index < 3 ? 'bg-green-50' : ''}>
+                <tr key={company.id} className={index < 3 ? 'bg-[#FFF5F5]' : ''}>
                   <td className="font-bold">
                     {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
                   </td>
-                  <td className="font-semibold">{company.name}</td>
+                  <td className="font-semibold text-[#222222]">{company.name}</td>
                   <td className="text-center">{'⭐'.repeat(company.scores.culture)}</td>
                   <td className="text-center">{'⭐'.repeat(company.scores.compensation)}</td>
                   <td className="text-center">{'⭐'.repeat(company.scores.growth)}</td>
                   <td className="text-center">{'⭐'.repeat(company.scores.diversity)}</td>
                   <td className="text-center">{'⭐'.repeat(company.scores.wfh)}</td>
-                  <td className="text-right font-bold text-green-600">{company.total}/25</td>
+                  <td className="text-right font-bold text-[#FF5A5F]">{company.total}/25</td>
                 </tr>
               ))}
             </tbody>

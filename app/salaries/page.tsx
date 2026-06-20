@@ -1,17 +1,41 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 
-export default function SalariesPage() {
+function SalariesContent() {
+  const searchParams = useSearchParams();
   const [salaries, setSalaries] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [selectedLevel, setSelectedLevel] = useState<string>('all');
+  const [selectedCompany, setSelectedCompany] = useState<string>('all');
+  const [loading, setLoading] = useState(true);
+  const [companies, setCompanies] = useState<string[]>([]);
+
+  const levels = ['L3', 'L4', 'L5', 'L6', 'SDE-I', 'SDE-II', 'SDE-III', 'Staff', 'Principal'];
+
+  // Get company filter from URL
+  useEffect(() => {
+    const companyParam = searchParams.get('company');
+    if (companyParam) {
+      setSelectedCompany(companyParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     fetch('/api/salaries')
       .then(res => res.json())
       .then(data => {
-        setSalaries(data.data || []);
+        const salaryData = data.data || [];
+        setSalaries(salaryData);
+        // Get unique companies - FIX: properly type the data
+        const uniqueCompanies: string[] = [];
+        salaryData.forEach((s: any) => {
+          if (s.company?.name && !uniqueCompanies.includes(s.company.name)) {
+            uniqueCompanies.push(s.company.name);
+          }
+        });
+        setCompanies(uniqueCompanies);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -41,14 +65,17 @@ export default function SalariesPage() {
 
   const filteredSalaries = salaries.filter(s => {
     const searchLower = search.toLowerCase();
-    return (s.company?.name?.toLowerCase() || '').includes(searchLower) ||
-           (s.role?.toLowerCase() || '').includes(searchLower);
+    const matchesSearch = (s.company?.name?.toLowerCase() || '').includes(searchLower) ||
+                         (s.role?.toLowerCase() || '').includes(searchLower);
+    const matchesLevel = selectedLevel === 'all' || s.level === selectedLevel;
+    const matchesCompany = selectedCompany === 'all' || s.company?.name === selectedCompany;
+    return matchesSearch && matchesLevel && matchesCompany;
   });
 
   if (loading) {
     return (
       <div className="container-custom py-8">
-        <div className="text-center py-12">Loading salaries...</div>
+        <div className="text-center py-12 text-[#484848]">Loading salaries...</div>
       </div>
     );
   }
@@ -56,18 +83,41 @@ export default function SalariesPage() {
   return (
     <main className="container-custom py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937]">Software Engineer Salaries</h1>
-        <p className="text-gray-600 mt-1">{salaries.length} salary records</p>
+        <h1 className="text-3xl font-bold text-[#222222]">Software Engineer Salaries</h1>
+        <p className="text-[#717171] mt-1">{salaries.length} salary records</p>
       </div>
 
-      <div className="mb-4">
+      {/* Search and Filters */}
+      <div className="flex flex-col md:flex-row gap-4 mb-4">
         <input
           type="text"
           placeholder="Search companies or roles..."
-          className="search-input"
+          className="search-input flex-1"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        
+        <select
+          className="select-primary"
+          value={selectedCompany}
+          onChange={(e) => setSelectedCompany(e.target.value)}
+        >
+          <option value="all">All Companies</option>
+          {companies.map((company) => (
+            <option key={company} value={company}>{company}</option>
+          ))}
+        </select>
+
+        <select
+          className="select-primary"
+          value={selectedLevel}
+          onChange={(e) => setSelectedLevel(e.target.value)}
+        >
+          <option value="all">All Levels</option>
+          {levels.map((level) => (
+            <option key={level} value={level}>{level}</option>
+          ))}
+        </select>
       </div>
 
       <div className="card overflow-hidden">
@@ -87,20 +137,20 @@ export default function SalariesPage() {
             <tbody>
               {filteredSalaries.map((salary) => (
                 <tr key={salary.id}>
-                  <td className="font-semibold">{salary.company?.name || 'Unknown'}</td>
-                  <td>{salary.role}</td>
+                  <td className="font-semibold text-[#222222]">{salary.company?.name || 'Unknown'}</td>
+                  <td className="text-[#484848]">{salary.role}</td>
                   <td>
                     <span className={`badge ${getLevelClass(salary.level)}`}>
                       {salary.level}
                     </span>
                   </td>
-                  <td className="text-gray-600">{salary.location}</td>
-                  <td className="text-right font-medium">{formatCurrency(Number(salary.baseSalary))}</td>
-                  <td className="text-right text-gray-500">
+                  <td className="text-[#484848]">{salary.location}</td>
+                  <td className="text-right font-medium text-[#222222]">{formatCurrency(Number(salary.baseSalary))}</td>
+                  <td className="text-right text-[#717171]">
                     {Number(salary.stock) > 0 ? formatCurrency(Number(salary.stock)) : '—'}
                   </td>
                   <td className="text-right">
-                    <span className="text-lg font-bold text-[#10B981]">
+                    <span className="text-lg font-bold text-[#FF5A5F]">
                       {formatCurrency(Number(salary.totalCompensation))}
                     </span>
                   </td>
@@ -109,12 +159,20 @@ export default function SalariesPage() {
             </tbody>
           </table>
         </div>
-        <div className="px-4 py-3 border-t border-gray-100 bg-gray-50">
-          <div className="text-sm text-gray-600 text-center">
-            Showing <span className="font-medium">{filteredSalaries.length}</span> records
+        <div className="px-4 py-3 border-t border-[#EBEBEB] bg-[#F7F7F7] rounded-b-xl">
+          <div className="text-sm text-[#717171] text-center">
+            Showing <span className="font-medium text-[#222222]">{filteredSalaries.length}</span> records
           </div>
         </div>
       </div>
     </main>
+  );
+}
+
+export default function SalariesPage() {
+  return (
+    <Suspense fallback={<div className="container-custom py-8"><div className="text-center py-12 text-[#484848]">Loading...</div></div>}>
+      <SalariesContent />
+    </Suspense>
   );
 }

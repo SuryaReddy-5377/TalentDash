@@ -20,17 +20,17 @@ export default function EquityCalculator() {
   return (
     <main className="container-custom py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1F2937]">Equity Calculator</h1>
-        <p className="text-gray-600 mt-1">Calculate your RSU/ESOP value</p>
+        <h1 className="text-3xl font-bold text-[#222222]">Equity Calculator</h1>
+        <p className="text-[#717171] mt-1">Calculate your RSU/ESOP value</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="card p-6 border-green-100">
-          <h3 className="font-semibold mb-4">Enter your details</h3>
+        <div className="card p-6">
+          <h3 className="font-semibold text-[#222222] mb-4">Enter your details</h3>
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Number of Shares</label>
+              <label className="block text-sm font-medium text-[#484848] mb-1">Number of Shares</label>
               <input
                 type="range"
                 min="100"
@@ -38,17 +38,17 @@ export default function EquityCalculator() {
                 step="100"
                 value={shares}
                 onChange={(e) => setShares(Number(e.target.value))}
-                className="w-full"
+                className="w-full accent-[#FF5A5F]"
               />
-              <div className="flex justify-between text-sm text-gray-500">
+              <div className="flex justify-between text-sm text-[#717171]">
                 <span>100</span>
-                <span className="font-medium text-green-600">{shares} shares</span>
+                <span className="font-medium text-[#FF5A5F]">{shares} shares</span>
                 <span>10,000</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Current Share Price (₹)</label>
+              <label className="block text-sm font-medium text-[#484848] mb-1">Current Share Price (₹)</label>
               <input
                 type="range"
                 min="100"
@@ -56,17 +56,17 @@ export default function EquityCalculator() {
                 step="100"
                 value={currentPrice}
                 onChange={(e) => setCurrentPrice(Number(e.target.value))}
-                className="w-full"
+                className="w-full accent-[#FF5A5F]"
               />
-              <div className="flex justify-between text-sm text-gray-500">
+              <div className="flex justify-between text-sm text-[#717171]">
                 <span>₹100</span>
-                <span className="font-medium text-green-600">₹{currentPrice}</span>
+                <span className="font-medium text-[#FF5A5F]">₹{currentPrice}</span>
                 <span>₹5,000</span>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Strike Price (₹)</label>
+              <label className="block text-sm font-medium text-[#484848] mb-1">Strike Price (₹)</label>
               <input
                 type="range"
                 min="100"
@@ -74,39 +74,39 @@ export default function EquityCalculator() {
                 step="100"
                 value={strikePrice}
                 onChange={(e) => setStrikePrice(Number(e.target.value))}
-                className="w-full"
+                className="w-full accent-[#FF5A5F]"
               />
-              <div className="flex justify-between text-sm text-gray-500">
+              <div className="flex justify-between text-sm text-[#717171]">
                 <span>₹100</span>
-                <span className="font-medium text-green-600">₹{strikePrice}</span>
+                <span className="font-medium text-[#FF5A5F]">₹{strikePrice}</span>
                 <span>₹3,000</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="card p-6 border-green-100">
-          <h3 className="font-semibold mb-4">Your Equity Value</h3>
+        <div className="card p-6">
+          <h3 className="font-semibold text-[#222222] mb-4">Your Equity Value</h3>
           
           <div className="space-y-4">
-            <div className="bg-green-50 rounded-lg p-4">
-              <p className="text-sm text-gray-600">Total Equity Value</p>
-              <p className="text-3xl font-bold text-green-600">{formatCurrency(totalValue)}</p>
+            <div className="bg-[#FFF5F5] rounded-lg p-4">
+              <p className="text-sm text-[#717171]">Total Equity Value</p>
+              <p className="text-3xl font-bold text-[#FF5A5F]">{formatCurrency(totalValue)}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-xs text-gray-500">Total Profit</p>
-                <p className="font-semibold text-green-600">{formatCurrency(profit)}</p>
+              <div className="bg-[#F7F7F7] rounded-lg p-3">
+                <p className="text-xs text-[#717171]">Total Profit</p>
+                <p className="font-semibold text-[#FF5A5F]">{formatCurrency(profit)}</p>
               </div>
-              <div className="bg-gray-50 rounded-lg p-3">
-                <p className="text-xs text-gray-500">Profit %</p>
-                <p className="font-semibold text-green-600">{profitPercentage.toFixed(1)}%</p>
+              <div className="bg-[#F7F7F7] rounded-lg p-3">
+                <p className="text-xs text-[#717171]">Profit %</p>
+                <p className="font-semibold text-[#FF5A5F]">{profitPercentage.toFixed(1)}%</p>
               </div>
             </div>
 
-            <div className="bg-green-50 rounded-lg p-3 text-center">
-              <p className="text-sm text-gray-600">You have {shares} shares at ₹{currentPrice} each</p>
+            <div className="bg-[#FFF5F5] rounded-lg p-3 text-center">
+              <p className="text-sm text-[#717171]">You have {shares} shares at ₹{currentPrice} each</p>
             </div>
           </div>
         </div>

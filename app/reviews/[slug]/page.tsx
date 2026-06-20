@@ -60,28 +60,28 @@ export default async function ReviewDetailPage({ params }: { params: Promise<{ s
 
   return (
     <main className="container-custom py-8">
-      <div className="card p-6 mb-6 border-green-100">
-        <h1 className="text-3xl font-bold text-[#1F2937]">{company.name} Reviews</h1>
+      <div className="card p-6 mb-6">
+        <h1 className="text-3xl font-bold text-[#222222]">{company.name} Reviews</h1>
         <div className="flex items-center gap-4 mt-2">
-          <span className="text-2xl font-bold text-green-600">★ {avgRating}</span>
-          <span className="text-gray-500">{reviews.length} reviews</span>
+          <span className="text-2xl font-bold text-[#FF5A5F]">★ {avgRating}</span>
+          <span className="text-[#717171]">{reviews.length} reviews</span>
         </div>
       </div>
 
       <div className="space-y-4">
         {reviews.map((review) => (
-          <div key={review.id} className="card p-6 border-green-100">
+          <div key={review.id} className="card p-6">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-[#1F2937]">{review.title}</h3>
-                <p className="text-sm text-gray-500">{review.author} • {review.date}</p>
+                <h3 className="font-semibold text-[#222222]">{review.title}</h3>
+                <p className="text-sm text-[#717171]">{review.author} • {review.date}</p>
               </div>
-              <span className="text-lg font-bold text-green-600">★ {review.rating}</span>
+              <span className="text-lg font-bold text-[#FF5A5F]">★ {review.rating}</span>
             </div>
-            <p className="text-gray-600 mt-3">{review.content}</p>
-            <div className="flex gap-4 mt-3 text-sm">
-              <span className="text-green-600">✅ {review.pros}</span>
-              <span className="text-red-500">⚠️ {review.cons}</span>
+            <p className="text-[#484848] mt-3">{review.content}</p>
+            <div className="flex flex-col gap-1 mt-3 text-sm">
+              <span className="text-[#008A05]">✅ {review.pros}</span>
+              <span className="text-[#D93025]">⚠️ {review.cons}</span>
             </div>
           </div>
         ))}

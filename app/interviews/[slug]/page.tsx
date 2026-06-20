@@ -52,44 +52,46 @@ export default async function InterviewDetailPage({ params }: { params: Promise<
     },
   ];
 
+  const difficultyColors: Record<string, string> = {
+    'Easy': 'difficulty-easy',
+    'Medium': 'difficulty-medium',
+    'Hard': 'difficulty-hard',
+    'Very Hard': 'difficulty-very-hard',
+  };
+
   return (
     <main className="container-custom py-8">
-      <div className="card p-6 mb-6 border-green-100">
-        <h1 className="text-3xl font-bold text-[#1F2937]">{company.name} Interviews</h1>
-        <p className="text-gray-600 mt-1">{interviews.length} interview experiences</p>
+      <div className="card p-6 mb-6">
+        <h1 className="text-3xl font-bold text-[#222222]">{company.name} Interviews</h1>
+        <p className="text-[#717171] mt-1">{interviews.length} interview experiences</p>
       </div>
 
       <div className="space-y-4">
         {interviews.map((interview) => (
-          <div key={interview.id} className="card p-6 border-green-100">
+          <div key={interview.id} className="card p-6">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-[#1F2937]">{interview.role}</h3>
+                <h3 className="font-semibold text-[#222222]">{interview.role}</h3>
                 <div className="flex gap-2 mt-1">
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    interview.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :
-                    interview.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
-                    interview.difficulty === 'Hard' ? 'bg-orange-100 text-orange-700' :
-                    'bg-red-100 text-red-700'
-                  }`}>
+                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${difficultyColors[interview.difficulty]}`}>
                     {interview.difficulty}
                   </span>
-                  <span className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-[#FFF5F5] text-[#FF5A5F] px-2 py-1 rounded-full">
                     {interview.rounds} rounds
                   </span>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    interview.offer === 'Selected' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                    interview.offer === 'Selected' ? 'bg-[#008A05] text-white' : 'bg-[#D93025] text-white'
                   }`}>
                     {interview.offer}
                   </span>
                 </div>
               </div>
-              <span className="text-lg font-bold text-green-600">★ {interview.rating}</span>
+              <span className="text-lg font-bold text-[#FF5A5F]">★ {interview.rating}</span>
             </div>
-            <p className="text-gray-600 mt-3">{interview.experience}</p>
+            <p className="text-[#484848] mt-3">{interview.experience}</p>
             <div className="mt-3">
-              <p className="text-sm font-medium text-gray-700">Common Questions:</p>
-              <ul className="list-disc list-inside text-sm text-gray-600 mt-1">
+              <p className="text-sm font-medium text-[#222222]">Common Questions:</p>
+              <ul className="list-disc list-inside text-sm text-[#484848] mt-1">
                 {interview.questions.map((q, i) => (
                   <li key={i}>{q}</li>
                 ))}
