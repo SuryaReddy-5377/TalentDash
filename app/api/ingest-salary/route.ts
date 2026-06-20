@@ -55,7 +55,7 @@ export async function POST(request: Request) {
         bonus: Number(body.bonus) || 0,
         stock: Number(body.stock) || 0,
         totalCompensation: totalCompensation,
-        source: body.source || 'SCRAPED',
+        source: body.source || 'CONTRIBUTOR',
         confidenceScore: Number(body.confidenceScore),
         isVerified: body.isVerified || false,
       },

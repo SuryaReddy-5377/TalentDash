@@ -1,11 +1,11 @@
 {
   "/api/salaries/route": "app/api/salaries/route.js",
-  "/page": "app/page.js",
-  "/compare/page": "app/compare/page.js",
+  "/api/ingest-salary/route": "app/api/ingest-salary/route.js",
   "/companies/page": "app/companies/page.js",
+  "/compare/page": "app/compare/page.js",
   "/salaries/page": "app/salaries/page.js",
+  "/workplace-index/page": "app/workplace-index/page.js",
   "/community/page": "app/community/page.js",
-  "/reviews/[slug]/page": "app/reviews/[slug]/page.js",
-  "/companies/[slug]/page": "app/companies/[slug]/page.js",
-  "/reviews/page": "app/reviews/page.js"
+  "/interviews/page": "app/interviews/page.js",
+  "/tools/page": "app/tools/page.js"
 }
